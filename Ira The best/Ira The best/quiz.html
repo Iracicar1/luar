@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <link rel="stylesheet" href="estilo2.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz">
+            <p id="pergunta"></p>
+            <div id="opcoes"></div>
+            <button onclick="proximaPergunta()">Próxima</button>
+        
+        </div>
+    </div>
+    <div id="resultado" class="hidden">
+        <h2>Resultado Final</h2>
+        <p id="mensagem"></p>
+        <button onclick="reiniciarQuiz()">Jogar Novamente</button>
+    </div>
+    <audio id="errouSound" src="errou.mp3"></audio><!--Tocar ao errar questão -->
+    <audio id="sucessSound" src="look.mp3"></audio><!--Música do final-->
+</body>
+</html>
+<script>
+const perguntas = [
+    {
+        pergunta: "O que é BIG DATA?",
+        opcoes: ["Pequeno banco de dados", "grande banco de dados", "não tem dados", ""],
+        resposta: "grande banco de dados"
+    },
+    {
+        pergunta:"Qual o nome do currso?",
+        opcoes:["IA", "BIG DATA", "C#", "Empreendorismo"],
+        resposta: "BIG DATA"
+    },
+    {
+        pergunta:"Agora em Brasilia esta?",
+        opcoes:["quente", "frio", "razoável", "gelado"],
+        resposta: "gelado"
+    },
+    {
+        pergunta:"Uma das linguagens de programação usadas na IA",
+        opcoes: ["HTML", "CSS", "PYTHON", "C-"],
+        resposta:"PYTHON"
+    },
+     {
+        pergunta:"Sou rápido, invisivel e viajo pelo ar. Conecto pessoas, mas ninguem",
+        opcoes: ["Bluetooth", "wi-fi", "cabo usb", "satélite"] ,
+        resposta: "wi-fi"          
+     }
+];    
+    
+let indiceAtual = 0;
+let acertos = 0;
+let respostaSelecionada = "";
+
+function carregarPergunta() {
+ const perguntaAtual =  perguntas[indiceAtual];
+ document.getElementById("pergunta").textContent = perguntaAtual.pergunta;
+ 
+ const opcoesContainer = document.getElementById("opcoes");
+ opcoesContainer.innerHTML ="";
+ respostaSelecionada = ""; 
+
+
+perguntaAtual.opcoes.forEach(opcao => {
+    const botao = document.createElement("button");
+    botao.textContent = opcao;
+    botao.classList.add("opcao");
+    botao.onclick = () =>{
+        //Resetar estilos
+        const botoes = document.querySelectorAll(".opcao");
+        botoes.forEach(b =>b.style.backgroundColor = "#ffffff");
+        //Marcar como selecionado
+
+        botao.style.backgroundColor= "#ffcc00";
+        respostaSelecionada= opcao;
+    };
+    opcoesContainer.appendChild(botao);
+});
+}
+
+function proximaPergunta(){
+    if (respostaSelecionada ===""){
+        alert("Por favor,selecione uma reposta antes de continuar.");
+        return;
+    }
+    const perguntaAtual = perguntas[indiceAtual];
+    if (respostaSelecionada === perguntaAtual.resposta){
+        acertos++;
+    }else{
+        document.getElementById("errouSound").play();//TOCAR SOM DE ERRO
+    }
+
+    indiceAtual++;
+    if(indiceAtual <perguntas.length){
+        carregarPergunta();
+    }else{
+        mostrarResultado();
+    }    
+           
+    
+}
+function mostrarResultado(){
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("resultado").classList.remove("hidden");
+
+    let total= perguntas.length;
+    let erros = total - acertos;
+
+    document.getElementById("mensagem").innerHTML=`
+        Você acertou <strong>${acertos}</strong> de ${total} perguntas!<br>
+        Você errou <strong>${erros}</strong>.
+    `;
+
+document.getElementById("sucessSound").play();//TOCAR SOM FINAL
+}
+function reiniciarQuiz(){
+    indiceAtual = 0;
+    acertos = 0;
+    document.getElementById("resultado").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    carregarPergunta();
+}
+
+carregarPergunta();
+ </script>
+<!--chatbot-->   
+    <div class="container-chatbot">
+        <div id="janela-chat" class="janela-chat hidden">
+            <div class="header-chat">
+                <div class="header-chat-título">
+                    <h3>Fale com IraIA</h3>
+                    <select id="seletor-ia" class="seletor-ia">
+                        <option value="gemini">Gemini (Padrão)</option>
+                        <optiion value="claude" disabled>Claude (Em breve)</option>
+                            </select>
+                            </div>
+                            <button id="btn-fechar-chat">&times;</button>
+                            </div>
+                            <div id="corpo-chat" class="corpo-chat">
+                                <div class="mensagem-bot">
+                                    <span>Olá! 😊 Sou IraIA, a assistente virtual da Escola do Futuro. Como posso ajudar?
+                                        </span>
+                                        </div>
+                                        </div>
+                                        <div class="rodape-chat">
+                                            <input type="text" id="input-chat" placeholder="Digite sua pergunta...">
+                                            <button id="btn-enviar-chat">
+                                                <ion-icon name="send-outline"></ion-icon>
+                                                </button>
+                                                </div>
+                                                </div>
+                                                <button id="btn-abrir-chat" class="btn-abrir-chat">
+                                                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                                                    </button>
+                                                    </div>
+
+  <script>
+    const btnAbrirChat= document.getElementById('btn-abrir-chat');
+    const btnFecharChat= document.getElementById('btn-fechar-chat');
+    const janelaChat= document.getElementById('janela-chat');
+    const corpoChat= document.getElementById('corpo-chat');
+    const inputChat= document.getElementById ('input-chat');
+    const btnEnviarChat= document.getElementById('btn-enviar-chat');
+    const seletorIA= document.getElementById('seletor-ia');
+
+    let historicoChat=[];
+
+    const CHAVES_API={
+       gemini: "AIzaSyCzd7cd-nzytrL7g7V2GWQc5k58KgRqfqg",
+       claude: ""
+    };
+
+    btnAbrirChat.addEventListener('click', () => {
+    janelaChat.classList.remove('hidden');
+    btnAbrirChat.classList.add('hidden');
+    });
+
+    btnFecharChat.addEventListener('click',()=> {
+        janelaChat.classList.add('hidden');
+        btnAbrirChat.classList.remove('hidden');
+    });
+
+    const enviarMensagem = async ()=>{
+        const mensagemUsuario = inputChat.value.trim();
+        if ("mensagemUsuario === ") return;
+
+        adicionarMensagemNaTela(mensagemUsuario, 'mensagem-usuario');
+        inputChat.value="";
+
+                historicoChat.push({ role:"user", parts:[{ text:mensagemUsuario}] });
+                const divDigitando= adicionarMensagemNaTela('Digitando...','mensagem-bot digitando');
+                const iaSelecionada = seletorIA.value;
+
+                try{
+                    const respostaIA = await obterRespostaDaIA(iaSelecionada);
+                    divDigitando.remove();
+                    adicionarMensagemNaTela(respostaIA,'mensagem-bot');
+
+                    historicoChat.push({ role:"model",parts:[{text:respostaIA}]});
+ 
+                } catch (error) {
+                   console.error("Erro ao obter resposta da IA:", error);
+                   divDigitando.remove();
+                   adicionarMensagemNaTela('Desculpe, não consegui me conectar.Tente novamente mais tarde.','mensagem-bot');
+
+                   historicoChat.pop();
+                }
+            };
+            function adicionarMensagemNaTela(texto,classe){
+                const divMensagem = document.createElement('div');
+                divMensagem.className = classe;
+                divMensagem.innerHTML='<span>${texto}</span>';
+                corpoChat.appendChild(divMensagem);
+                corpoChat.scrollTop= corpoChat.scrollHeight;
+                return divMensagem;
+            }
+            async function obterRespostaDaIA(provedor) {
+             switch(provedor) {
+                case 'gemini':
+                return await obterRespostaDoGemini();
+                case 'claude':
+                return "Resposta simulada do Claude: Olá! Como posso te ajudar hoje?";
+                default:
+                return "Provedor de IA não reconhecido.";
+
+             }
+            }  
+            
+            async function obterRespostaDoGemini() {
+                const apiKev = CHAVES_API.gemini;
+                if (!apikey) {
+                    return "A chave da API do Gemini não configurada."; 
+                }  
+                const apiURL= 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}';
+                const payload= {
+                    contents: historicoChat,
+                    systemInstruction:{
+                        parts:[{
+                            text:"Você é um assistente virtual amigável, engraçado e com uma inteligência extrema da 'Escola de Tecnologia Futuro'.Responda á seguinte pergunta de forma concisa e útil."                            
+                        }]
+                    }
+                };            
+            };
+             const response= await fetch(apiUrl,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(payload)
+            });
+
+            if(!response.ok) {
+                throw new Error('Erro na API do Gemini:${response.statusText}');
+            }
+
+            const result= await response.json();
+
+            if(result.candidates && result.candidates.length > 0){
+                return result.candidates[0].content.parts[0].text;
+            
+            }else{
+                return"Não consegui gerar uma resposta no momento.";
+            }
+        
+        
+        btnEnviarChat.addEventListener('click',enviarMensagem);
+        inputChat.addEventListener('keypress',(e)=>{
+            if(e.key === 'Enter') enviarMensagem();
+
+        });
+            
+    </script> 
+    </body>
+  </html>
+
+
+    
+        
