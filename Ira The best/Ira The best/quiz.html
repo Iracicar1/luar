@@ -137,10 +137,10 @@ carregarPergunta();
                     <h3>Fale com IraIA</h3>
                     <select id="seletor-ia" class="seletor-ia">
                         <option value="gemini">Gemini (Padrão)</option>
-                        <optiion value="claude" disabled>Claude (Em breve)</option>
-                            </select>
+                        <option value="claude" disabled>Claude(Em breve)</option>
+                    </select>
                             </div>
-                            <button id="btn-fechar-chat">&times;</button>
+                            <button id="btn-fechar-chat" type="button">&times;</button>
                             </div>
                             <div id="corpo-chat" class="corpo-chat">
                                 <div class="mensagem-bot">
@@ -155,7 +155,7 @@ carregarPergunta();
                                                 </button>
                                                 </div>
                                                 </div>
-                                                <button id="btn-abrir-chat" class="btn-abrir-chat">
+                                                <button id="btn-abrir-chat" class="btn-abrir-chat" type="button">
                                                     <ion-icon name="chatbubbles-outline"></ion-icon>
                                                     </button>
                                                     </div>
@@ -176,22 +176,25 @@ carregarPergunta();
        claude: ""
     };
 
-    btnAbrirChat.addEventListener('click', () => {
+    btnAbrirChat.addEventListener('click',()=> {
     janelaChat.classList.remove('hidden');
     btnAbrirChat.classList.add('hidden');
     });
 
     btnFecharChat.addEventListener('click',()=> {
-        janelaChat.classList.add('hidden');
-        btnAbrirChat.classList.remove('hidden');
+    janelaChat.classList.add('hidden');
+    btnAbrirChat.classList.remove('hidden');
     });
 
     const enviarMensagem = async ()=>{
         const mensagemUsuario = inputChat.value.trim();
-        if ("mensagemUsuario === ") return;
+      //  if (mensagemUsuario === ") return;
+        if (mensagemUsuario === "") {
+            
+        }
 
         adicionarMensagemNaTela(mensagemUsuario, 'mensagem-usuario');
-        inputChat.value="";
+        inputChat.value = '';
 
                 historicoChat.push({ role:"user", parts:[{ text:mensagemUsuario}] });
                 const divDigitando= adicionarMensagemNaTela('Digitando...','mensagem-bot digitando');
@@ -237,7 +240,7 @@ carregarPergunta();
                 if (!apikey) {
                     return "A chave da API do Gemini não configurada."; 
                 }  
-                const apiURL= 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}';
+                const apiURL= `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}` ;
                 const payload= {
                     contents: historicoChat,
                     systemInstruction:{
@@ -278,5 +281,5 @@ carregarPergunta();
   </html>
 
 
-    
-        
+
+
