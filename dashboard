@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Escolar</title>
+    
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" ></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </head>
+    <body>
+        
+        
+
+    <div class="container-principal">
+        <div class="barra-lateral">
+         <div class="barra-lateral-header">
+          <h1>Escola Futuro </h1>
+        </div>
+        <ul class="lista-menu">
+            <li class="item-menu">
+                <a href="#">
+                    <span class="item-menu-icone"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="item-menu-texto">Visão Geral</span>
+                </a>
+            </li>        
+            <li class="item-menu-menu-ativo">
+                <a href="#">
+                    <span class="item-menu-icone"><ion-icon name="person-add-outline"></ion-icon></span>
+                    <span class="item-menu-texto">Matrículas</span>
+                    <span id="contador-pendentes"></span>
+                </a>
+            </li>
+            <li class="item-menu">
+                <a href="#">
+                    <span class="item-menu-icone"><ion-icon name="gane-controller-outline"></ion-icon></span>
+                    <span class="item-menu-texto">Gamificação</span>
+                </a>
+            </li>
+            <li class="item-menu">
+                <a href="#">
+                    <span class="item-menu-icone"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                    <span class="item-menu-texto">Chatbots</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                    <span class="item-menu-icone"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="item-menu-texto">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+           
+        <div class="conteudo-principal">
+            <div class="p-4 flex items-center space-x-3 border-b border-blue-700">
+                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="sidebar-text">
+                    <div class="font-medium">Prof. Carlos Silva</div>
+                    <div class="text-xs text-blue-200">Administrador</div>
+                </div>
+            </div>
+            
+            <!-- Menu -->
+            <div class="flex-1 overflow-y-auto py-4">
+                <div class="space-y-1 px-2">
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-700">
+                        <i class="fas fa-home"></i>
+                        <span class="sidebar-text">Dashboard</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-users"></i>
+                        <span class="sidebar-text">Alunos</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span class="sidebar-text">Professores</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="sidebar-text">Calendário</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-book"></i>
+                        <span class="sidebar-text">Disciplinas</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="sidebar-text">Relatórios</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-cog"></i>
+                        <span class="sidebar-text">Configurações</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Collapse Button -->
+            <div class="p-4 border-t border-blue-700 hidden md:block">
+                <button id="toggleSidebar" class="w-full flex items-center justify-center space-x-2 text-blue-200 hover:text-white">
+                    <i class="fas fa-chevron-left"></i>
+                    <span class="sidebar-text">Recolher</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content flex-1 overflow-y-auto">
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="mobile-menu-btn fixed top-4 left-4 z-50 bg-blue-800 text-white p-2 rounded-lg md:hidden">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Top Bar -->
+            <div class="bg-white shadow-sm p-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <i class="fas fa-bell text-gray-500 hover:text-blue-600 cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-envelope text-gray-500 hover:text-blue-600 cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">5</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-user text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Content -->
+            <div class="p-4 space-y-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-users text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Total de Alunos</div>
+                            <div class="text-2xl font-bold">1,248</div>
+                            <div class="text-sm text-green-500 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 5.2% desde o mês passado
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-chalkboard-teacher text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Total de Professores</div>
+                            <div class="text-2xl font-bold">48</div>
+                            <div class="text-sm text-green-500 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 2 novos este mês
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Taxa de Aprovação</div>
+                            <div class="text-2xl font-bold">92%</div>
+                            <div class="text-sm text-green-500 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 3% desde o último semestre
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center">
+                            <i class="fas fa-user-clock text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Frequência Média</div>
+                            <div class="text-2xl font-bold">96.5%</div>
+                            <div class="text-sm text-red-500 flex items-center">
+                                <i class="fas fa-arrow-down mr-1"></i> 1.2% desde o mês passado
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts and Events -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Attendance Chart -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">Frequência Mensal</h2>
+                            <select class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm">
+                                <option>Últimos 6 meses</option>
+                                <option>Este ano</option>
+                                <option>Ano passado</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Events -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">Próximos Eventos</h2>
+                            <button class="text-blue-600 text-sm font-medium">Ver todos</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-calendar-check text-red-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Reunião de Pais</div>
+                                    <div class="text-sm text-gray-500">15 de Outubro, 18:00</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-running text-green-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Gincana Escolar</div>
+                                    <div class="text-sm text-gray-500">20 de Outubro, 08:00</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-microscope text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Feira de Ciências</div>
+                                    <div class="text-sm text-gray-500">25 de Outubro, 10:00</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-purple-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Formatura 9º Ano</div>
+                                    <div class="text-sm text-gray-500">30 de Novembro, 19:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activities and Quick Actions -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Recent Activities -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">Atividades Recentes</h2>
+                            <button class="text-blue-600 text-sm font-medium">Ver todas</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-user-plus text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Novo aluno matriculado</div>
+                                    <div class="text-sm text-gray-500">Ana Clara foi matriculada no 6º ano</div>
+                                    <div class="text-xs text-gray-400">2 horas atrás</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Avaliação concluída</div>
+                                    <div class="text-sm text-gray-500">Prova de Matemática - 8º ano</div>
+                                    <div class="text-xs text-gray-400">Ontem, 15:30</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                                    <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Aviso importante</div>
+                                    <div class="text-sm text-gray-500">Manutenção programada para o laboratório de informática</div>
+                                    <div class="text-xs text-gray-400">Ontem, 10:15</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                    <i class="fas fa-book text-purple-500"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Novo material adicionado</div>
+                                    <div class="text-sm text-gray-500">Material de História para o 7º ano</div>
+                                    <div class="text-xs text-gray-400">3 dias atrás</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <h2 class="text-lg font-semibold mb-4">Ações Rápidas</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-blue-100 text-blue-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-blue-200 transition">
+                                <i class="fas fa-user-plus text-xl mb-2"></i>
+                                <span class="text-sm">Adicionar Aluno</span>
+                            </button>
+                            <button class="bg-green-100 text-green-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-green-200 transition">
+                                <i class="fas fa-clipboard-check text-xl mb-2"></i>
+                                <span class="text-sm">Registrar Presença</span>
+                            </button>
+                            <button class="bg-purple-100 text-purple-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-purple-200 transition">
+                                <i class="fas fa-file-invoice text-xl mb-2"></i>
+                                <span class="text-sm">Gerar Relatório</span>
+                            </button>
+                            <button class="bg-yellow-100 text-yellow-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-yellow-200 transition">
+                                <i class="fas fa-bell text-xl mb-2"></i>
+                                <span class="text-sm">Enviar Aviso</span>
+                            </button>
+                            <button class="bg-red-100 text-red-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-red-200 transition">
+                                <i class="fas fa-calendar-plus text-xl mb-2"></i>
+                                <span class="text-sm">Agendar Evento</span>
+                            </button>
+                            <button class="bg-indigo-100 text-indigo-600 p-3 rounded-lg flex flex-col items-center justify-center hover:bg-indigo-200 transition">
+                                <i class="fas fa-book text-xl mb-2"></i>
+                                <span class="text-sm">Adicionar Material</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Toggle Sidebar
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        toggleSidebar?.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('expanded');
+            
+            // Change icon and text
+            const icon = toggleSidebar.querySelector('i');
+            const text = toggleSidebar.querySelector('span');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-left');
+                icon.classList.add('fa-chevron-right');
+                text.textContent = 'Expandir';
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-left');
+                text.textContent = 'Recolher';
+            }
+        });
+        
+        // Mobile Menu Toggle
+        mobileMenuBtn?.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.contains(e.target) && e.target !== mobileMenuBtn) {
+                sidebar.classList.remove('active');
+            }
+        });
+        
+        // Attendance Chart
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'],
+                datasets: [{
+                    label: 'Frequência %',
+                    data: [95.2, 96.1, 97.3, 96.8, 97.5, 96.2, 95.8, 96.5, 97.1, 96.5],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: '#3B82F6',
+                    pointBorderColor: '#fff',
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#3B82F6',
+                    pointHoverBorderColor: '#fff',
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 90,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Update chart on window resize
+        window.addEventListener('resize', function() {
+            attendanceChart.resize();
+        });
+    </script>
+</body>
+</html>
