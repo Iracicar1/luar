@@ -166,11 +166,6 @@ button:hover{
     border-top: 1px solid #e5e7eb;
 }
 #input-chat{
-    border: none;
-    font-size: 1.5rem;
-    color:#ffcc00;
-    cursor: pointer;
-    padding: 0.5rem;
     flex:1;
     border:none;
     padding:0.5rem;
@@ -179,4 +174,9 @@ button:hover{
 }
 #btn-enviar-chat{
     background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #f59e0b;
+    cursor: pointer;
+    padding: 0.5rem;
 }
