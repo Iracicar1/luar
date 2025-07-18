@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quiz</title>
     <link rel="stylesheet" href="estilo2.css">
+    <style>
+    .hidden { display: none !important; }
+    </style>
 </head>
 <body>
     <div class="quiz-container">
@@ -139,26 +142,26 @@ carregarPergunta();
                         <option value="gemini">Gemini (Padrão)</option>
                         <option value="claude" disabled>Claude(Em breve)</option>
                     </select>
-                            </div>
-                            <button id="btn-fechar-chat" type="button">&times;</button>
-                            </div>
-                            <div id="corpo-chat" class="corpo-chat">
-                                <div class="mensagem-bot">
-                                    <span>Olá! 😊 Sou IraIA, a assistente virtual da Escola do Futuro. Como posso ajudar?
-                                        </span>
-                                        </div>
-                                        </div>
-                                        <div class="rodape-chat">
-                                            <input type="text" id="input-chat" placeholder="Digite sua pergunta...">
-                                            <button id="btn-enviar-chat">
-                                                <ion-icon name="send-outline"></ion-icon>
-                                                </button>
-                                                </div>
-                                                </div>
-                                                <button id="btn-abrir-chat" class="btn-abrir-chat" type="button">
-                                                    <ion-icon name="chatbubbles-outline"></ion-icon>
-                                                    </button>
-                                                    </div>
+                </div>
+                <button id="btn-fechar-chat" type="button">&times;</button>
+            </div>
+            <div id="corpo-chat" class="corpo-chat">
+                <div class="mensagem-bot">
+                    <span>Olá! 😊 Sou IraIA, a assistente virtual da Escola do Futuro. Como posso ajudar?
+                    </span>
+                </div>
+            </div>
+            <div class="rodape-chat">
+                <input type="text" id="input-chat" placeholder="Digite sua pergunta...">
+                <button id="btn-enviar-chat">
+                    <ion-icon name="send-outline"></ion-icon>
+                </button>
+            </div>
+        </div>
+        <button id="btn-abrir-chat" class="btn-abrir-chat" type="button">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+        </button>
+    </div>
 
   <script>
     const btnAbrirChat= document.getElementById('btn-abrir-chat');
@@ -218,9 +221,9 @@ carregarPergunta();
             function adicionarMensagemNaTela(texto,classe){
                 const divMensagem = document.createElement('div');
                 divMensagem.className = classe;
-                divMensagem.innerHTML='<span>${texto}</span>';
+                divMensagem.innerHTML = `<span>${texto}</span>`;
                 corpoChat.appendChild(divMensagem);
-                corpoChat.scrollTop= corpoChat.scrollHeight;
+                corpoChat.scrollTop = corpoChat.scrollHeight;
                 return divMensagem;
             }
             async function obterRespostaDaIA(provedor) {
@@ -236,44 +239,38 @@ carregarPergunta();
             }  
             
             async function obterRespostaDoGemini() {
-                const apiKev = CHAVES_API.gemini;
-                if (!apikey) {
+                const apiKey = CHAVES_API.gemini;
+                if (!apiKey) {
                     return "A chave da API do Gemini não configurada."; 
-                }  
-                const apiURL= `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}` ;
-                const payload= {
+                }
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = {
                     contents: historicoChat,
-                    systemInstruction:{
-                        parts:[{
-                            text:"Você é um assistente virtual amigável, engraçado e com uma inteligência extrema da 'Escola de Tecnologia Futuro'.Responda á seguinte pergunta de forma concisa e útil."                            
+                    systemInstruction: {
+                        parts: [{
+                            text: "Você é um assistente virtual amigável, engraçado e com uma inteligência extrema da 'Escola de Tecnologia Futuro'. Responda à seguinte pergunta de forma concisa e útil."
                         }]
                     }
-                };            
-            };
-             const response= await fetch(apiUrl,{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify(payload)
-            });
-
-            if(!response.ok) {
-                throw new Error('Erro na API do Gemini:${response.statusText}');
+                };
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    throw new Error(`Erro na API do Gemini: ${response.statusText}`);
+                }
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    return "Não consegui gerar uma resposta no momento.";
+                }
             }
 
-            const result= await response.json();
-
-            if(result.candidates && result.candidates.length > 0){
-                return result.candidates[0].content.parts[0].text;
-            
-            }else{
-                return"Não consegui gerar uma resposta no momento.";
-            }
-        
-        
-        btnEnviarChat.addEventListener('click',enviarMensagem);
-        inputChat.addEventListener('keypress',(e)=>{
-            if(e.key === 'Enter') enviarMensagem();
-
+        btnEnviarChat.addEventListener('click', enviarMensagem);
+        inputChat.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') enviarMensagem();
         });
             
     </script> 
