@@ -1,0 +1,808 @@
+!
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excelencia Idiomas - Escola de Línguas Estrangeiras</title>
+    <meta name="description" content="Aprenda inglês, espanhol, francês e outros idiomas na melhor escola de línguas da região. Cursos para todas as idades e níveis.">
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #3e6791;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/1200/600?random=1');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Cursos */
+        .cursos {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #2c3e50;
+        }
+        
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .curso-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .curso-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .curso-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .curso-content {
+            padding: 20px;
+        }
+        
+        .curso-content h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .curso-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Depoimentos */
+        .depoimentos {
+            background-color: #f1f1f1;
+            padding: 80px 0;
+        }
+        
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .depoimento-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .depoimento-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .depoimento-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        /* Contato */
+        .contato {
+            padding: 80px 0;
+        }
+        
+        .contato-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contato-info h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        
+        .contato-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contato-item i {
+            margin-right: 10px;
+            color: #3498db;
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #3498db;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        /*Chatbot*/
+        .container-chatbot {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 100;
+        }
+.btn-abrir-chat{
+    background-color: #31f731;
+    color: rgb(3, 97, 25);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-7px);
+    }
+}
+.janela-chat {
+    width: 350px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}   
+.header-chat {
+    background-color: #55c8f5;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-chat-título  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.header-chat-título h3 {
+    font-weight: 600;
+    margin: 0;
+}
+.seletor-ia {
+    background-color: #f3dd84;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem;
+    margin-top: 4px;
+    outline: none;
+    cursor: pointer;
+}
+.header-chat button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.corpo-chat {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+}
+.mensagem-bot,.mensagem-usuario{
+    display: flex;
+    max-width: 80%;
+}
+.mensagem-bot span, .mensagem-usuario span{
+    padding: 0.5rem 0.75rem;
+    border-radius: 1rem;
+    line-height: 1.4;
+
+}
+.mensagem-bot {
+    align-self: flex-start;
+}
+.mensagem-bot span{
+    background-color: rgb(187, 187, 252);
+}
+.mensagem-usuario{
+    align-self: flex-end;
+}
+.mensagem-usuario span{
+    background-color: #f59e0b;
+    color:white;
+}
+.mensagem-bot.digitando span{
+    color: #032466;
+    font-style: italic;
+}
+.rodape-chat{
+    display: flex;
+    padding: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+#input-chat{
+    flex:1;
+    border:none;
+    padding:0.5rem;
+    font-size: 1rem;
+    outline: none;
+}
+#btn-enviar-chat{
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #f1c06a;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+/* ...existing code... */
+.hidden {
+    display: none !important;
+}
+/* ...existing code... */
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo"> Excelencia <span>Idiomas</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="cadastro.html">Inscrições</a></li>
+                    <li><a href="login.html">Área do Aluno</a></li>
+                    <li><a href="quiz1.html">Quiz</a></li>
+                </ul>
+            </nav>
+            <a href="#contato" class="btn">Matricule-se</a>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Aprenda um novo idioma com os melhores professores</h1>
+            <p>Nossa escola oferece cursos de alta qualidade para todos os níveis, com metodologia inovadora e professores qualificados.</p>
+            <a href="#cursos" class="btn">Conheça nossos cursos</a>
+        </div>
+    </section>
+
+    <section class="cursos" id="cursos">
+        <div class="container">
+            <h2 class="section-title">Nossos Cursos</h2>
+            <div class="cursos-grid">
+                <div class="curso-card">
+                    <div class="curso-img" style="background-image: url('https://picsum.photos/400/300?random=2');"></div>
+                    <div class="curso-content">
+                        <h3>Inglês</h3>
+                        <p>Curso completo de inglês para todos os níveis, do básico ao avançado, com foco em conversação.</p>
+                        <a href="#contato" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="curso-card">
+                    <div class="curso-img" style="background-image: url('https://picsum.photos/400/300?random=3');"></div>
+                    <div class="curso-content">
+                        <h3>Espanhol</h3>
+                        <p>Aprenda espanhol com professores nativos e domine o idioma em pouco tempo.</p>
+                        <a href="#contato" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="curso-card">
+                    <div class="curso-img" style="background-image: url('https://picsum.photos/400/300?random=4');"></div>
+                    <div class="curso-content">
+                        <h3>Francês</h3>
+                        <p>Descubra a beleza da língua francesa com nosso curso especializado.</p>
+                        <a href="#contato" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="curso-card">
+                    <div class="curso-img" style="background-image: url('https://picsum.photos/400/300?random=5');"></div>
+                    <div class="curso-content">
+                        <h3>Alemão</h3>
+                        <p>Curso completo de alemão para quem deseja estudar ou trabalhar na Europa.</p>
+                        <a href="#contato" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="depoimentos" id="depoimentos">
+        <div class="container">
+            <h2 class="section-title">O que nossos alunos dizem</h2>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <p class="depoimento-text">"Os professores da Excelencia Idiomas são incríveis! Em 6 meses já consigo me comunicar em inglês com confiança."</p>
+                    <p class="depoimento-author">- Carlos Silva</p>
+                </div>
+                <div class="depoimento-card">
+                    <p class="depoimento-text">"Os professores são muito atenciosos e as aulas são dinâmicas. Super recomendo!"</p>
+                    <p class="depoimento-author">- Ana Oliveira</p>
+                </div>
+                <div class="depoimento-card">
+                    <p class="depoimento-text">"Consegui a certificação que precisava para meu mestrado graças ao curso de inglês avançado."</p>
+                    <p class="depoimento-author">- Pedro Santos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contato" id="contato">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-container">
+                <div class="contato-info">
+                    <h3>Informações de Contato</h3>
+                    <div class="contato-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Rua das Línguas, 123 - Centro, Cidade/Estado</span>
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(61) 1234-5678</span>
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@excelenciaidiomas.com.br</span>
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Segunda a Sexta: 8h às 20h<br>Sábado: 8h às 13h</span>
+                    </div>
+                </div>
+                <div class="contato-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone">
+                        </div>
+                        <div class="form-group">
+                            <label for="curso">Curso de interesse</label>
+                            <select id="curso">
+                                <option value="">Selecione um curso</option>
+                                <option value="ingles">Inglês</option>
+                                <option value="espanhol">Espanhol</option>
+                                <option value="frances">Francês</option>
+                                <option value="alemao">Alemão</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Excelencia Idiomas</h3>
+                    <p>Há mais de 10 anos ensinando idiomas com excelência e transformando vidas através da comunicação.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#cursos">Cursos</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Cursos</h3>
+                    <ul>
+                        <li><a href="#cursos">Inglês</a></li>
+                        <li><a href="#cursos">Espanhol</a></li>
+                        <li><a href="#cursos">Francês</a></li>
+                        <li><a href="#cursos">Alemão</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Excelencia Idiomas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Suavizar rolagem para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Formulário de contato
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            form.reset();
+        });
+    </script>
+    <!--chatbot-->   
+    <div class="container-chatbot">
+        <div id="janela-chat" class="janela-chat hidden">
+            <div class="header-chat">
+                <div class="header-chat-título">
+                    <h3>Fale com IraIA</h3>
+                    <select id="seletor-ia" class="seletor-ia">
+                        <option value="gemini">Gemini (Padrão)</option>
+                        <option value="claude" disabled>Claude(Em breve)</option>
+                    </select>
+                </div>
+                <button id="btn-fechar-chat" type="button">&times;</button>
+            </div>
+            <div id="corpo-chat" class="corpo-chat">
+                <div class="mensagem-bot">
+                    <span>Olá! 😊 Sou IraIA, a assistente virtual da Excelencia Idiomas. Como posso ajudar?
+                    </span>
+                </div>
+            </div>
+            <div class="rodape-chat">
+                <input type="text" id="input-chat" placeholder="Digite sua pergunta...">
+                <button id="btn-enviar-chat">
+                    <ion-icon name="send-outline"></ion-icon>
+                </button>
+            </div>
+        </div>
+        <button id="btn-abrir-chat" class="btn-abrir-chat" type="button">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+        </button>
+    </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      var btnAbrirChat = document.getElementById('btn-abrir-chat');
+      var btnFecharChat = document.getElementById('btn-fechar-chat');
+      var janelaChat = document.getElementById('janela-chat');
+      var corpoChat = document.getElementById('corpo-chat');
+      var inputChat = document.getElementById('input-chat');
+      var btnEnviarChat = document.getElementById('btn-enviar-chat');
+      var seletorIA = document.getElementById('seletor-ia');
+
+      var historicoChat = [];
+      var CHAVES_API = {
+        gemini: "AIzaSyCzd7cd-nzytrL7g7V2GWQc5k58KgRqfqg",
+        claude: ""
+      };
+
+      if (btnAbrirChat && janelaChat && btnFecharChat) {
+        btnAbrirChat.addEventListener('click', function() {
+          janelaChat.classList.remove('hidden');
+          btnAbrirChat.classList.add('hidden');
+        });
+        btnFecharChat.addEventListener('click', function(e) {
+          e.stopPropagation();
+          janelaChat.classList.add('hidden');
+          btnAbrirChat.classList.remove('hidden');
+        });
+      }
+
+      if (btnEnviarChat && inputChat && corpoChat && seletorIA) {
+        btnEnviarChat.onclick = enviarMensagem;
+        inputChat.onkeypress = function(e) {
+          if (e.key === 'Enter') enviarMensagem();
+        };
+      }
+
+      async function enviarMensagem() {
+        var mensagemUsuario = inputChat.value.trim();
+        if (mensagemUsuario === "") return;
+        adicionarMensagemNaTela(mensagemUsuario, 'mensagem-usuario');
+        inputChat.value = '';
+        historicoChat.push({ role: "user", parts: [{ text: mensagemUsuario }] });
+        var divDigitando = adicionarMensagemNaTela('Digitando...', 'mensagem-bot digitando');
+        var iaSelecionada = seletorIA.value;
+        try {
+          var respostaIA = await obterRespostaDaIA(iaSelecionada);
+          divDigitando.remove();
+          adicionarMensagemNaTela(respostaIA, 'mensagem-bot');
+          historicoChat.push({ role: "model", parts: [{ text: respostaIA }] });
+        } catch (error) {
+          console.error("Erro ao obter resposta da IA:", error);
+          divDigitando.remove();
+          adicionarMensagemNaTela('Desculpe, não consegui me conectar.Tente novamente mais tarde.', 'mensagem-bot');
+          historicoChat.pop();
+        }
+      }
+      function adicionarMensagemNaTela(texto, classe) {
+        var divMensagem = document.createElement('div');
+        divMensagem.className = classe;
+        divMensagem.innerHTML = `<span>${texto}</span>`;
+        corpoChat.appendChild(divMensagem);
+        corpoChat.scrollTop = corpoChat.scrollHeight;
+        return divMensagem;
+      }
+      async function obterRespostaDaIA(provedor) {
+        switch (provedor) {
+          case 'gemini':
+            return await obterRespostaDoGemini();
+          case 'claude':
+            return "Resposta simulada do Claude: Olá! Como posso te ajudar hoje?";
+          default:
+            return "Provedor de IA não reconhecido.";
+        }
+      }
+      async function obterRespostaDoGemini() {
+        var apiKey = CHAVES_API.gemini;
+        if (!apiKey) {
+          return "A chave da API do Gemini não configurada.";
+        }
+        var apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+        var payload = {
+          contents: historicoChat,
+          systemInstruction: {
+            parts: [{
+              text: "Você é um assistente virtual amigável, engraçado e com uma inteligência extrema da 'Escola de Tecnologia Futuro'. Responda à seguinte pergunta de forma concisa e útil."
+            }]
+          }
+        };
+        var response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+          throw new Error(`Erro na API do Gemini: ${response.statusText}`);
+        }
+        var result = await response.json();
+        if (result.candidates && result.candidates.length > 0) {
+          return result.candidates[0].content.parts[0].text;
+        } else {
+          return "Não consegui gerar uma resposta no momento.";
+        }
+      }
+    });
+  </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>        
+</body>
+</html>

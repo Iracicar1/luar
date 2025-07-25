@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <link rel="stylesheet" href="estilo2.css">
+    <style>
+    .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz">
+            <p id="pergunta"></p>
+            <div id="opcoes"></div>
+            <button onclick="proximaPergunta()">Próxima</button>
+        
+        </div>
+    </div>
+    <div id="resultado" class="hidden">
+        <h2>Resultado Final</h2>
+        <p id="mensagem"></p>
+        <button onclick="reiniciarQuiz()">Jogar Novamente</button>
+    </div>
+    <audio id="errouSound" src="errou.mp3"></audio><!--Tocar ao errar questão -->
+    <audio id="sucessSound" src="look.mp3"></audio><!--Música do final-->
+</body>
+</html>
+<script>
+const perguntas = [
+    {
+        pergunta: "Qual país é conhecido por ser a terra do inglês e possui a maior população de falantes nativos?",
+        opcoes: ["Canadá", "Reino Unido", "Estados Unidos", "Austrália"],
+        resposta: "Reino Unido"
+    },
+    {
+        pergunta:"Qual país da América do Sul tem o espanhol como idioma oficial e é famoso por sua dança e música?",
+        opcoes:["Argentina", "Chile", "Colômbia", "Peru"],
+        resposta: "Argentina"
+    },
+    {
+        pergunta:"Qual país africano tem o francês como idioma oficial e é conhecido por sua diversidade cultural?",
+        opcoes:["Níger", "Senegal", "Mali", "Costa do Marfim"],
+        resposta: "Senegal"
+    },
+    {
+        pergunta:"Uma das linguagens de programação usadas na IA",
+        opcoes: ["HTML", "CSS", "PYTHON", "C-"],
+        resposta:"PYTHON"
+    },
+     {
+        pergunta:"Sou rápido, invisivel e viajo pelo ar. Conecto pessoas, mas ninguem",
+        opcoes: ["Bluetooth", "wi-fi", "cabo usb", "satélite"] ,
+        resposta: "wi-fi"          
+     }
+];    
+    
+let indiceAtual = 0;
+let acertos = 0;
+let respostaSelecionada = "";
+
+function carregarPergunta() {
+ const perguntaAtual =  perguntas[indiceAtual];
+ document.getElementById("pergunta").textContent = perguntaAtual.pergunta;
+ 
+ const opcoesContainer = document.getElementById("opcoes");
+ opcoesContainer.innerHTML ="";
+ respostaSelecionada = ""; 
+
+
+perguntaAtual.opcoes.forEach(opcao => {
+    const botao = document.createElement("button");
+    botao.textContent = opcao;
+    botao.classList.add("opcao");
+    botao.onclick = () =>{
+        //Resetar estilos
+        const botoes = document.querySelectorAll(".opcao");
+        botoes.forEach(b =>b.style.backgroundColor = "#ffffff");
+        //Marcar como selecionado
+
+        botao.style.backgroundColor= "#ffcc00";
+        respostaSelecionada= opcao;
+    };
+    opcoesContainer.appendChild(botao);
+});
+}
+
+function proximaPergunta(){
+    if (respostaSelecionada ===""){
+        alert("Por favor,selecione uma reposta antes de continuar.");
+        return;
+    }
+    const perguntaAtual = perguntas[indiceAtual];
+    if (respostaSelecionada === perguntaAtual.resposta){
+        acertos++;
+    }else{
+        document.getElementById("errouSound").play();//TOCAR SOM DE ERRO
+    }
+
+    indiceAtual++;
+    if(indiceAtual <perguntas.length){
+        carregarPergunta();
+    }else{
+        mostrarResultado();
+    }    
+           
+    
+}
+function mostrarResultado(){
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("resultado").classList.remove("hidden");
+
+    let total= perguntas.length;
+    let erros = total - acertos;
+
+    document.getElementById("mensagem").innerHTML=`
+        Você acertou <strong>${acertos}</strong> de ${total} perguntas!<br>
+        Você errou <strong>${erros}</strong>.
+    `;
+
+document.getElementById("sucessSound").play();//TOCAR SOM FINAL
+}
+function reiniciarQuiz(){
+    indiceAtual = 0;
+    acertos = 0;
+    document.getElementById("resultado").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    carregarPergunta();
+}
+
+carregarPergunta();
+</script>
+</body>
+</html>
+
+
+
+
